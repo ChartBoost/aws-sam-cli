@@ -221,5 +221,6 @@ class LambdaImage(object):
 
         for layer in layers:
             dockerfile_content = dockerfile_content + \
-                                 "ADD --chown=sbx_user1051:495 {} {}\n".format(layer.name, LambdaImage._LAYERS_DIR)
+                                 "ADD {} {}\n".format(layer.name, LambdaImage._LAYERS_DIR) + \
+                                 "RUN chown sbx_user1051:495 {}\n".format(LambdaImage._LAYERS_DIR)
         return dockerfile_content
